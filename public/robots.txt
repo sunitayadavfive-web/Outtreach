@@ -1,3 +1,7 @@
 User-agent: *
 Allow: /
+
+User-agent: facebookexternalhit
+Allow: /
+
 Sitemap: https://www.outtreach.com/sitemap.xml
