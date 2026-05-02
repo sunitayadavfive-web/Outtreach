@@ -1,0 +1,56 @@
+@import url('https://fonts.googleapis.com/css2?family=Anton&family=DM+Sans:ital,wght@0,400;0,700;1,400&family=Space+Mono&display=swap');
+@import "tailwindcss";
+
+@theme {
+  --font-sans: "DM Sans", ui-sans-serif, system-ui, sans-serif;
+  --font-display: "Anton", sans-serif;
+  --font-mono: "Space Mono", ui-monospace, SFMono-Regular, monospace;
+  
+  --color-accent-yellow: #FFE000;
+  --color-text-black: #050505;
+  --color-text-gray: #b3b3b3;
+  --color-muted-gray: #666666;
+  --color-section-bg: #f9f9f9;
+}
+
+@layer base {
+  html {
+    scroll-behavior: smooth;
+  }
+  
+  body {
+    @apply font-sans bg-white text-text-black antialiased;
+  }
+  
+  h1, h2, h3 {
+    @apply font-display uppercase tracking-tight;
+  }
+}
+
+.ticker-animation {
+  display: inline-block;
+  animation: ticker 30s linear infinite;
+}
+
+@keyframes shake {
+  0%, 100% { transform: translateX(0); }
+  25% { transform: translateX(-5px); }
+  75% { transform: translateX(5px); }
+}
+
+@keyframes shimmer {
+  100% { transform: translateX(100%); }
+}
+
+.animate-shake {
+  animation: shake 0.2s ease-in-out infinite;
+}
+
+.hide-scrollbar::-webkit-scrollbar {
+  display: none;
+}
+
+.hide-scrollbar {
+  -ms-overflow-style: none;
+  scrollbar-width: none;
+}

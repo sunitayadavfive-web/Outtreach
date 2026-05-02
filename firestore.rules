@@ -1,0 +1,38 @@
+rules_version = '2';
+service cloud.firestore {
+  match /databases/{database}/documents {
+    // Default deny
+    match /{document=**} {
+      allow read, write: if false;
+    }
+
+    // Helper functions
+    function isSignedIn() {
+      return request.auth != null;
+    }
+    
+    function isAdmin() {
+      return isSignedIn() && request.auth.token.email == 'sunitayadavfive@gmail.com';
+    }
+
+    function isValidReview(data) {
+      return data.keys().hasAll(['name', 'rating', 'comment', 'createdAt']) &&
+             data.keys().size() <= 6 &&
+             data.name is string && data.name.size() > 0 && data.name.size() < 100 &&
+             data.rating is number && data.rating >= 1 && data.rating <= 5 &&
+             data.comment is string && data.comment.size() > 0 && data.comment.size() < 1000 &&
+             data.createdAt == request.time;
+    }
+
+    match /reviews/{reviewId} {
+      // Anyone can read reviews
+      allow list, get: if true;
+      
+      // Anyone can create a review if it's valid
+      allow create: if isValidReview(request.resource.data);
+      
+      // Only admin can update or delete
+      allow update, delete: if isAdmin();
+    }
+  }
+}

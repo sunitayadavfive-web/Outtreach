@@ -1,0 +1,24 @@
+{
+  "entities": {
+    "Review": {
+      "title": "Review",
+      "description": "A user review for Outtreach agency",
+      "type": "object",
+      "properties": {
+        "id": { "type": "string" },
+        "name": { "type": "string" },
+        "rating": { "type": "number" },
+        "comment": { "type": "string" },
+        "createdAt": { "type": "string", "format": "date-time" },
+        "approved": { "type": "boolean" }
+      },
+      "required": ["name", "rating", "comment", "createdAt"]
+    }
+  },
+  "firestore": {
+    "reviews": {
+      "schema": "Review",
+      "description": "Collection of user reviews"
+    }
+  }
+}
