@@ -462,7 +462,7 @@ export default function AdminDashboard({ onBack }: AdminDashboardProps) {
                             <span className="text-neutral-400 font-mono text-[10px] uppercase">{new Date(selectedItem.createdAt).toLocaleDateString()}</span>
                         </div>
                         {selectedItem.coverImage && (
-                            <img src={selectedItem.coverImage} alt="Cover" className="w-full h-40 object-cover rounded-xl mb-6 shadow-md" />
+                            <img referrerPolicy="no-referrer" src={selectedItem.coverImage} alt="Cover" className="w-full h-40 object-cover rounded-xl mb-6 shadow-md" />
                         )}
                         <div className="space-y-6">
                             {selectedItem.sections?.map((s: any, i: number) => (

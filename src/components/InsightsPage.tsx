@@ -864,7 +864,7 @@ export function InsightsMainPage({ onBack, onNavigate }: { onBack: () => void, o
                {/* Image Header */}
                <div className="h-48 md:h-56 w-full overflow-hidden relative">
                  <div className="absolute inset-0 bg-black/30 group-hover:bg-transparent transition-colors duration-500 z-10" />
-                 <img src={post.image} alt={post.title} className="w-full h-full object-cover transform group-hover:scale-105 transition-transform duration-700 ease-out" />
+                 <img referrerPolicy="no-referrer" src={post.image} alt={post.title} className="w-full h-full object-cover transform group-hover:scale-105 transition-transform duration-700 ease-out" />
                  <div className="absolute inset-0 bg-gradient-to-t from-[#111111] via-[#111111]/80 to-transparent z-20" />
                </div>
 
@@ -907,7 +907,7 @@ export function InsightsMainPage({ onBack, onNavigate }: { onBack: () => void, o
                {/* Image Header - Dynamic or generic fallback */}
                <div className="h-48 md:h-56 w-full overflow-hidden relative">
                  <div className="absolute inset-0 bg-black/30 group-hover:bg-transparent transition-colors duration-500 z-10" />
-                 <img src={post.coverImage || "https://images.unsplash.com/photo-1551288049-bebda4e38f71?q=80&w=800&auto=format&fit=crop"} alt={post.title} className="w-full h-full object-cover transform group-hover:scale-105 transition-transform duration-700 ease-out" />
+                 <img referrerPolicy="no-referrer" src={post.coverImage || "https://images.unsplash.com/photo-1551288049-bebda4e38f71?q=80&w=800&auto=format&fit=crop"} alt={post.title} className="w-full h-full object-cover transform group-hover:scale-105 transition-transform duration-700 ease-out" />
                  <div className="absolute inset-0 bg-gradient-to-t from-[#111111] via-[#111111]/80 to-transparent z-20" />
                </div>
 
@@ -968,7 +968,7 @@ export function DynamicInsightPage({ onBack, post }: { onBack: () => void, post:
 
         {post.coverImage && (
           <div className="w-full h-auto max-h-[40vh] md:max-h-[60vh] overflow-hidden rounded-2xl md:rounded-3xl mb-10 md:mb-16 shadow-[0_0_40px_rgba(255,230,0,0.1)] border border-white/10">
-            <img src={post.coverImage} alt={post.title} className="w-full h-full object-cover" />
+            <img referrerPolicy="no-referrer" src={post.coverImage} alt={post.title} className="w-full h-full object-cover" />
           </div>
         )}
 
@@ -983,7 +983,7 @@ export function DynamicInsightPage({ onBack, post }: { onBack: () => void, post:
                 )}
                 {section.image && (
                   <div className="w-full rounded-xl md:rounded-2xl overflow-hidden border border-white/5">
-                    <img src={section.image} alt={section.heading} className="w-full h-auto object-cover" />
+                    <img referrerPolicy="no-referrer" src={section.image} alt={section.heading} className="w-full h-auto object-cover" />
                   </div>
                 )}
                 {section.content && (

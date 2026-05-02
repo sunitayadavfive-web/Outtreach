@@ -599,7 +599,7 @@ export default function App() {
                     >
                       <div className="h-28 md:h-56 w-full overflow-hidden relative">
                         <div className="absolute inset-0 bg-black/10 group-hover:bg-transparent transition-colors duration-500 z-10" />
-                        <img src={post.image} loading="lazy" alt={post.title} className="w-full h-full object-cover transform group-hover:scale-105 transition-transform duration-700 ease-out" />
+                        <img referrerPolicy="no-referrer" src={post.image} loading="lazy" alt={post.title} className="w-full h-full object-cover transform group-hover:scale-105 transition-transform duration-700 ease-out" />
                         <div className="absolute inset-0 bg-gradient-to-t from-white via-white/40 to-transparent z-20" />
                       </div>
 
@@ -640,7 +640,7 @@ export default function App() {
                     >
                       <div className="h-28 md:h-56 w-full overflow-hidden relative">
                         <div className="absolute inset-0 bg-black/10 group-hover:bg-transparent transition-colors duration-500 z-10" />
-                        <img src={post.coverImage || "https://images.unsplash.com/photo-1551288049-bebda4e38f71?q=80&w=800&auto=format&fit=crop"} loading="lazy" alt={post.title} className="w-full h-full object-cover transform group-hover:scale-105 transition-transform duration-700 ease-out" />
+                        <img referrerPolicy="no-referrer" src={post.coverImage || "https://images.unsplash.com/photo-1551288049-bebda4e38f71?q=80&w=800&auto=format&fit=crop"} loading="lazy" alt={post.title} className="w-full h-full object-cover transform group-hover:scale-105 transition-transform duration-700 ease-out" />
                         <div className="absolute inset-0 bg-gradient-to-t from-white via-white/40 to-transparent z-20" />
                       </div>
 
