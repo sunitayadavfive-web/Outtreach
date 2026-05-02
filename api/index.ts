@@ -49,7 +49,7 @@ async function sendEmailNotification(subject: string, html: string) {
   const host = SMTP_HOST || "smtp.gmail.com";
   const port = parseInt(SMTP_PORT || "465");
 
-  console.log(\`System: Attempting to send email via \${host}:\${port}...\`);
+  console.log(`System: Attempting to send email via ${host}:${port}...`);
 
   const transporter = nodemailer.createTransport({
     host: host,
@@ -63,14 +63,21 @@ async function sendEmailNotification(subject: string, html: string) {
 
   try {
     await transporter.sendMail({
-      from: \`"Outtreach Intel" <\${SMTP_USER}>\`,
+      from: `"Outtreach Intel" <${SMTP_USER}>`,
       to: RECEIVER_EMAIL || SMTP_USER,
       subject: subject,
       html: html,
     });
     console.log("Email sent successfully:", subject);
   } catch (error: any) {
-    console.error("Critical Email Error:", error.message);
+    console.error("Critical Email Error:");
+    console.error(`- Host: ${host}`);
+    console.error(`- User: ${SMTP_USER}`);
+    console.error(`- Error: ${error.message}`);
+    
+    if (error.code === 'EAI_AGAIN' || error.code === 'ENOTFOUND') {
+      console.error("TIP: Your SMTP_HOST appears to be incorrect. For Gmail, use 'smtp.gmail.com'. Check your environment variables in Vercel.");
+    }
   }
 }
 
@@ -169,8 +176,8 @@ app.post("/api/bookings", formLimiter, async (req, res) => {
   data.bookings.push(newBooking);
   saveData(data);
   
-  const emailHtml = getEmailTemplate("High-Intent 1:1 Booking Request", \`<p>Incoming booking from \${newBooking.name}</p>\`);
-  await sendEmailNotification(\`BOOKING: 1:1 Call with \${newBooking.name}\`, emailHtml);
+  const emailHtml = getEmailTemplate("High-Intent 1:1 Booking Request", `<p>Incoming booking from ${newBooking.name}</p>`);
+  await sendEmailNotification(`BOOKING: 1:1 Call with ${newBooking.name}`, emailHtml);
   
   res.status(201).json(newBooking);
 });
@@ -194,8 +201,8 @@ app.post("/api/requests", formLimiter, async (req, res) => {
   data.requests.push(newRequest);
   saveData(data);
   
-  const emailHtml = getEmailTemplate("Direct Lead Manifested", \`<p>Incoming request from \${newRequest.fullName}</p>\`);
-  await sendEmailNotification(\`LEAD: \${newRequest.fullName}\`, emailHtml);
+  const emailHtml = getEmailTemplate("Direct Lead Manifested", `<p>Incoming request from ${newRequest.fullName}</p>`);
+  await sendEmailNotification(`LEAD: ${newRequest.fullName}`, emailHtml);
   
   res.status(201).json(newRequest);
 });
@@ -219,8 +226,8 @@ app.post("/api/comments", apiLimiter, async (req, res) => {
   data.comments.push(newComment);
   saveData(data);
 
-  const emailHtml = getEmailTemplate("Social Interaction Logged", \`<p>Incoming comment from \${newComment.name}</p>\`);
-  await sendEmailNotification(\`ENGAGEMENT: New comment on \${newComment.postId}\`, emailHtml);
+  const emailHtml = getEmailTemplate("Social Interaction Logged", `<p>Incoming comment from ${newComment.name}</p>`);
+  await sendEmailNotification(`ENGAGEMENT: New comment on ${newComment.postId}`, emailHtml);
 
   res.status(201).json(newComment);
 });
