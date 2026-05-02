@@ -5,11 +5,21 @@ import nodemailer from "nodemailer";
 import rateLimit from "express-rate-limit";
 import helmet from "helmet";
 import cors from "cors";
+import { initializeApp, getApps, getApp } from "firebase/app";
+import { getFirestore, collection, getDocs, addDoc, doc, deleteDoc } from "firebase/firestore";
 
-// Check if running on Vercel to route data file to writable /tmp
-const DATA_FILE = process.env.VERCEL 
-  ? path.join("/tmp", "data.json") 
-  : path.join(process.cwd(), "data.json");
+const configPath = path.join(process.cwd(), "firebase-applet-config.json");
+let db: any;
+
+try {
+  if (fs.existsSync(configPath)) {
+    const firebaseConfig = JSON.parse(fs.readFileSync(configPath, "utf-8"));
+    const app = getApps().length === 0 ? initializeApp(firebaseConfig) : getApp();
+    db = getFirestore(app, firebaseConfig.firestoreDatabaseId);
+  }
+} catch (e) {
+  console.log("Firebase not configured properly in Vercel backend", e);
+}
 
 // Helper for sending emails
 function getEmailTemplate(title: string, content: string) {
@@ -81,32 +91,19 @@ async function sendEmailNotification(subject: string, html: string) {
   }
 }
 
-// Initialize data file if it doesn't exist
-if (!fs.existsSync(DATA_FILE)) {
+// Fetch data from Firebase
+async function getFirestoreData(collectionName: string) {
+  if (!db) return [];
   try {
-    fs.writeFileSync(DATA_FILE, JSON.stringify({ requests: [], comments: [], bookings: [], insights: [] }, null, 2));
+    const querySnapshot = await getDocs(collection(db, collectionName));
+    const list: any[] = [];
+    querySnapshot.forEach((docSnap) => {
+      list.push({ id: docSnap.id, ...docSnap.data() });
+    });
+    return list;
   } catch (err) {
-    console.warn("Could not write initial data file:", err);
-  }
-}
-
-function getData() {
-  try {
-    if (!fs.existsSync(DATA_FILE)) return { requests: [], comments: [], bookings: [], insights: [], reviews: [] };
-    const data = JSON.parse(fs.readFileSync(DATA_FILE, "utf-8"));
-    if (!data.insights) data.insights = [];
-    if (!data.reviews) data.reviews = [];
-    return data;
-  } catch (err) {
-    return { requests: [], comments: [], bookings: [], insights: [], reviews: [] };
-  }
-}
-
-function saveData(data: any) {
-  try {
-    fs.writeFileSync(DATA_FILE, JSON.stringify(data, null, 2));
-  } catch (err) {
-    console.warn("Could not save data:", err);
+    console.error(`Error reading ${collectionName} from Firebase`, err);
+    return [];
   }
 }
 
@@ -139,9 +136,18 @@ app.use(express.json({ limit: '10kb' }));
 // Apply base limit
 app.use("/api/", apiLimiter);
 
-app.get("/api/data", (req, res) => {
+app.get("/api/data", async (req, res) => {
   const passcode = req.query.passcode;
-  const data = getData();
+  
+  const [requests, comments, bookings, insights, reviews] = await Promise.all([
+    getFirestoreData("requests"),
+    getFirestoreData("comments"),
+    getFirestoreData("bookings"),
+    getFirestoreData("insights"),
+    getFirestoreData("reviews")
+  ]);
+
+  const data = { requests, comments, bookings, insights, reviews };
   
   if (passcode === "public") {
     return res.json({ requests: [], comments: data.comments, insights: data.insights, reviews: data.reviews });
@@ -154,7 +160,6 @@ app.get("/api/data", (req, res) => {
 });
 
 app.post("/api/bookings", formLimiter, async (req, res) => {
-  const data = getData();
   const { name, businessName, phone, email, brandDescription, problem } = req.body;
   
   if (!name || !email || !businessName || !phone) {
@@ -162,7 +167,6 @@ app.post("/api/bookings", formLimiter, async (req, res) => {
   }
 
   const newBooking = {
-    id: Date.now().toString(),
     type: 'booking',
     name: String(name).slice(0, 100),
     businessName: String(businessName).slice(0, 100),
@@ -172,9 +176,15 @@ app.post("/api/bookings", formLimiter, async (req, res) => {
     problem: String(problem).slice(0, 1000),
     createdAt: new Date().toISOString()
   };
-  if (!data.bookings) data.bookings = [];
-  data.bookings.push(newBooking);
-  saveData(data);
+  
+  if (db) {
+    try {
+        const docRef = await addDoc(collection(db, "bookings"), newBooking);
+        (newBooking as any).id = docRef.id;
+    } catch(e) { console.error("Firebase booking save error:", e); }
+  } else {
+    (newBooking as any).id = Date.now().toString();
+  }
   
   const emailHtml = getEmailTemplate("High-Intent 1:1 Booking Request", `<p>Incoming booking from ${newBooking.name}</p>`);
   await sendEmailNotification(`BOOKING: 1:1 Call with ${newBooking.name}`, emailHtml);
@@ -183,7 +193,6 @@ app.post("/api/bookings", formLimiter, async (req, res) => {
 });
 
 app.post("/api/requests", formLimiter, async (req, res) => {
-  const data = getData();
   const { fullName, email, brand, goals } = req.body;
 
   if (!fullName || !email) {
@@ -191,15 +200,21 @@ app.post("/api/requests", formLimiter, async (req, res) => {
   }
 
   const newRequest = {
-    id: Date.now().toString(),
     fullName: String(fullName).slice(0, 100),
     email: String(email).slice(0, 100),
     brand: String(brand).slice(0, 100),
     goals: String(goals).slice(0, 1000),
     createdAt: new Date().toISOString()
   };
-  data.requests.push(newRequest);
-  saveData(data);
+  
+  if (db) {
+    try {
+        const docRef = await addDoc(collection(db, "requests"), newRequest);
+        (newRequest as any).id = docRef.id;
+    } catch(e) { console.error("Firebase request save error:", e); }
+  } else {
+    (newRequest as any).id = Date.now().toString();
+  }
   
   const emailHtml = getEmailTemplate("Direct Lead Manifested", `<p>Incoming request from ${newRequest.fullName}</p>`);
   await sendEmailNotification(`LEAD: ${newRequest.fullName}`, emailHtml);
@@ -208,7 +223,6 @@ app.post("/api/requests", formLimiter, async (req, res) => {
 });
 
 app.post("/api/comments", apiLimiter, async (req, res) => {
-  const data = getData();
   const { postId, name, text, date } = req.body;
   
   if (!postId || !name || !text) {
@@ -216,15 +230,21 @@ app.post("/api/comments", apiLimiter, async (req, res) => {
   }
 
   const newComment = {
-    id: Date.now().toString(),
     postId: String(postId).slice(0, 50),
     name: String(name).slice(0, 100),
     text: String(text).slice(0, 500),
     date: String(date).slice(0, 50),
     createdAt: new Date().toISOString()
   };
-  data.comments.push(newComment);
-  saveData(data);
+
+  if (db) {
+    try {
+        const docRef = await addDoc(collection(db, "comments"), newComment);
+        (newComment as any).id = docRef.id;
+    } catch(e) { console.error("Firebase comment save error:", e); }
+  } else {
+    (newComment as any).id = Date.now().toString();
+  }
 
   const emailHtml = getEmailTemplate("Social Interaction Logged", `<p>Incoming comment from ${newComment.name}</p>`);
   await sendEmailNotification(`ENGAGEMENT: New comment on ${newComment.postId}`, emailHtml);
@@ -237,41 +257,61 @@ app.post("/api/insights", async (req, res) => {
   if (passcode !== "Outtreachversion7791@rise11") {
     return res.status(401).json({ error: "Unauthorized" });
   }
-  const data = getData();
+  
   const newInsight = {
-    id: Date.now().toString(),
     ...req.body,
     createdAt: new Date().toISOString()
   };
-  data.insights.push(newInsight);
-  saveData(data);
+
+  if (db) {
+    try {
+        const docRef = await addDoc(collection(db, "insights"), newInsight);
+        (newInsight as any).id = docRef.id;
+    } catch(e) { console.error("Firebase insight save error:", e); }
+  } else {
+    (newInsight as any).id = Date.now().toString();
+  }
+  
   res.status(201).json(newInsight);
 });
 
 app.post("/api/reviews", async (req, res) => {
-  const data = getData();
   const newReview = {
-    id: Date.now().toString(),
     ...req.body,
     createdAt: new Date().toISOString()
   };
-  data.reviews.push(newReview);
-  saveData(data);
+  
+  if (db) {
+      try {
+          const docRef = await addDoc(collection(db, "reviews"), newReview);
+          (newReview as any).id = docRef.id;
+      } catch(e) { console.error("Firebase review save error:", e); }
+  } else {
+      (newReview as any).id = Date.now().toString();
+  }
+
   res.status(201).json(newReview);
 });
 
-app.delete("/api/data/:type/:id", (req, res) => {
+app.delete("/api/data/:type/:id", async (req, res) => {
   const { type, id } = req.params;
   const passcode = req.query.passcode;
   if (passcode !== "Outtreachversion7791@rise11") {
     return res.status(401).json({ error: "Unauthorized" });
   }
 
-  const data = getData();
   if (["requests", "comments", "bookings", "insights", "reviews"].includes(type)) {
-    data[type] = data[type].filter((item: any) => item.id !== id);
-    saveData(data);
-    res.json({ success: true });
+    if (db) {
+        try {
+            await deleteDoc(doc(db, type, id));
+            res.json({ success: true });
+        } catch(e) {
+            console.error("Firebase delete error:", e);
+            res.status(500).json({ error: "Delete failed" });
+        }
+    } else {
+       res.json({ success: true }); // Mock success if DB not connected
+    }
   } else {
     res.status(400).json({ error: "Invalid type" });
   }
