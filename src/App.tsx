@@ -18,6 +18,9 @@ import AdminDashboard from "./components/AdminDashboard";
 import PasswordModal from "./components/PasswordModal";
 import BookingPage from "./components/BookingPage";
 import GetNoticedPage from "./components/GetNoticedPage";
+import founderImg from "./assets/regenerated_image_1777325423361.png";
+import cofounderImg from "./assets/regenerated_image_1777325495036.png";
+import operationsImg from "./assets/regenerated_image_1777533725823.png";
 import { 
   TrendingUp, 
   Flame, 
@@ -453,7 +456,7 @@ export default function App() {
                   <TeamMemberCard 
                     name="Pranjal Yadav"
                     role="Founder & CEO"
-                    image="regenerated_image_1777325423361.png"
+                    image={founderImg}
                     description='"A visionary in brand building, shaping brands that aren&apos;t just seen, but remembered."'
                     instagram="https://www.instagram.com/pranjalyadav__0?igsh=MTJ5M2xlYWg3MWU5OQ=="
                     linkedin="https://www.linkedin.com/in/pranjal-yadav-981034394?utm_source=share_via&utm_content=profile&utm_medium=member_android"
@@ -461,7 +464,7 @@ export default function App() {
                   <TeamMemberCard 
                     name="Anubhav Singh"
                     role="Co-Founder"
-                    image="regenerated_image_1777325495036.png"
+                    image={cofounderImg}
                     description='"Expert in mass communication, ensuring the right message hits the right audience."'
                     instagram="https://www.instagram.com/anubhav.singh.somvanshi?igsh=MnEya245N3U4NGJm"
                     linkedin="https://www.linkedin.com/in/anubhav-singh-4a2160406?utm_source=share_via&utm_content=profile&utm_medium=member_android"
@@ -469,7 +472,7 @@ export default function App() {
                   <TeamMemberCard 
                     name="Prashant Yadav"
                     role="Operations & Ads"
-                    image="regenerated_image_1777533725823.png"
+                    image={operationsImg}
                     description='"The analytical backbone making sure every ad budget works at peak efficiency."'
                     instagram="https://www.instagram.com/prashant_yadav_0_?igsh=ZW80azA5encwdDJj"
                   />

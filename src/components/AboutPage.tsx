@@ -13,6 +13,9 @@ import {
   ArrowLeft
 } from "lucide-react";
 import { AnimatePresence } from "motion/react";
+import founderImg from "../assets/regenerated_image_1777325423361.png";
+import cofounderImg from "../assets/regenerated_image_1777325495036.png";
+import operationsImg from "../assets/regenerated_image_1777533725823.png";
 
 interface TeamMemberProps {
   name: string;
@@ -173,7 +176,7 @@ export default function AboutPage({ onBack, onGetNoticed }: { onBack: () => void
             >
               <div className="absolute -inset-4 border border-[#FFEB00]/20 translate-x-4 translate-y-4" />
               <img 
-                src="regenerated_image_1777325423361.png" 
+                src={founderImg} 
                 alt="Founder Journey" 
                 className="w-full h-full object-cover filter grayscale hover:grayscale-0 transition-all duration-700"
                 referrerPolicy="no-referrer"
@@ -284,7 +287,7 @@ export default function AboutPage({ onBack, onGetNoticed }: { onBack: () => void
             <TeamMemberCard 
               name="Pranjal Yadav"
               role="Founder & CEO"
-              image="regenerated_image_1777325423361.png"
+              image={founderImg}
               description='"A visionary in brand building, shaping brands that aren&apos;t just seen, but remembered."'
               instagram="https://www.instagram.com/pranjalyadav__0?igsh=MTJ5M2xlYWg3MWU5OQ=="
               linkedin="https://www.linkedin.com/in/pranjal-yadav-981034394?utm_source=share_via&utm_content=profile&utm_medium=member_android"
@@ -292,7 +295,7 @@ export default function AboutPage({ onBack, onGetNoticed }: { onBack: () => void
             <TeamMemberCard 
               name="Anubhav Singh"
               role="Co-Founder"
-              image="regenerated_image_1777325495036.png"
+              image={cofounderImg}
               description='"Expert in mass communication, ensuring the right message hits the right audience."'
               instagram="https://www.instagram.com/anubhav.singh.somvanshi?igsh=MnEya245N3U4NGJm"
               linkedin="https://www.linkedin.com/in/anubhav-singh-4a2160406?utm_source=share_via&utm_content=profile&utm_medium=member_android"
@@ -300,7 +303,7 @@ export default function AboutPage({ onBack, onGetNoticed }: { onBack: () => void
             <TeamMemberCard 
               name="Prashant Yadav"
               role="Operations & Ads"
-              image="regenerated_image_1777533725823.png"
+              image={operationsImg}
               description='"The analytical backbone making sure every ad budget works at peak efficiency."'
               instagram="https://www.instagram.com/prashant_yadav_0_?igsh=ZW80azA5encwdDJj"
             />
