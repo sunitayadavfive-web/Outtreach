@@ -18,9 +18,9 @@ import AdminDashboard from "./components/AdminDashboard";
 import PasswordModal from "./components/PasswordModal";
 import BookingPage from "./components/BookingPage";
 import GetNoticedPage from "./components/GetNoticedPage";
-import founderImg from "./assets/regenerated_image_1777325423361.png";
-import cofounderImg from "./assets/regenerated_image_1777325495036.png";
-import operationsImg from "./assets/regenerated_image_1777533725823.png";
+import founderImg from "./assets/pranjal_yadav.jpg";
+import cofounderImg from "./assets/anubhav_singh.jpg";
+import operationsImg from "./assets/prashant_yadav.jpg";
 import { 
   TrendingUp, 
   Flame, 
