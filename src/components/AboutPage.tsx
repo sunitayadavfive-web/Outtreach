@@ -13,9 +13,9 @@ import {
   ArrowLeft
 } from "lucide-react";
 import { AnimatePresence } from "motion/react";
-const founderImg = "https://lh3.googleusercontent.com/d/1wi-T5j_PnN3q25tH7deSXSfJtx9QP21a=w1000";
-const cofounderImg = "https://lh3.googleusercontent.com/d/1hBpdobTGgekI5lVIS7Uf82QYEYoo0kPX=w1000";
-const operationsImg = "https://lh3.googleusercontent.com/d/15OeeOpS-o-knj0lgSiKclDxg_UJVNSat=w1000";
+const founderImg = "https://lh3.googleusercontent.com/d/1wi-T5j_PnN3q25tH7deSXSfJtx9QP21a=w600";
+const cofounderImg = "https://lh3.googleusercontent.com/d/1hBpdobTGgekI5lVIS7Uf82QYEYoo0kPX=w600";
+const operationsImg = "https://lh3.googleusercontent.com/d/15OeeOpS-o-knj0lgSiKclDxg_UJVNSat=w600";
 
 interface TeamMemberProps {
   name: string;
@@ -35,6 +35,7 @@ export function TeamMemberCard({ name, role, image, description, instagram, link
         <motion.img 
           src={image} 
           alt={name} 
+          loading="lazy"
           animate={{ 
             scale: isActive ? 1.1 : 1,
             filter: isActive ? "blur(4px)" : "blur(0px)" 

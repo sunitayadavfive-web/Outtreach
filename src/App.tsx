@@ -3,24 +3,45 @@
  * SPDX-License-Identifier: Apache-2.0
  */
 
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, Suspense } from "react";
 import { motion, AnimatePresence } from "motion/react";
 import Lenis from '@studio-freight/lenis';
 import AboutPage, { TeamMemberCard } from "./components/AboutPage";
-import { servicesData, WorkPage, GrowthMarketingPage, BrandIdentityPage, SocialMediaPage, SeoOrganicPage, PerformanceAdsPage, ContentProductionPage, AiAutomationPage } from "./components/WorkPages";
-import { InsightsMainPage, DynamicInsightPage, GrowthInsightPage, AdsInsightPage, AiInsightPage, LogoInsightPage } from "./components/InsightsPage";
-import { ReviewSlider } from "./components/ReviewSlider";
-import { ReviewPage } from "./components/ReviewPage";
+import { servicesData } from "./components/WorkPages";
 import { collection, onSnapshot, query, orderBy, deleteDoc, doc } from 'firebase/firestore';
 import { db } from './lib/firebase';
-import { PrivacyPolicyPage, DisclaimerPage, TermsAndConditionsPage, RefundPolicyPage } from "./components/LegalPages";
-import AdminDashboard from "./components/AdminDashboard";
 import PasswordModal from "./components/PasswordModal";
-import BookingPage from "./components/BookingPage";
-import GetNoticedPage from "./components/GetNoticedPage";
-const founderImg = "https://lh3.googleusercontent.com/d/1wi-T5j_PnN3q25tH7deSXSfJtx9QP21a=w1000";
-const cofounderImg = "https://lh3.googleusercontent.com/d/1hBpdobTGgekI5lVIS7Uf82QYEYoo0kPX=w1000";
-const operationsImg = "https://lh3.googleusercontent.com/d/15OeeOpS-o-knj0lgSiKclDxg_UJVNSat=w1000";
+
+// Lazy load pages
+const WorkPage = React.lazy(() => import("./components/WorkPages").then(m => ({ default: m.WorkPage })));
+const GrowthMarketingPage = React.lazy(() => import("./components/WorkPages").then(m => ({ default: m.GrowthMarketingPage })));
+const BrandIdentityPage = React.lazy(() => import("./components/WorkPages").then(m => ({ default: m.BrandIdentityPage })));
+const SocialMediaPage = React.lazy(() => import("./components/WorkPages").then(m => ({ default: m.SocialMediaPage })));
+const SeoOrganicPage = React.lazy(() => import("./components/WorkPages").then(m => ({ default: m.SeoOrganicPage })));
+const PerformanceAdsPage = React.lazy(() => import("./components/WorkPages").then(m => ({ default: m.PerformanceAdsPage })));
+const ContentProductionPage = React.lazy(() => import("./components/WorkPages").then(m => ({ default: m.ContentProductionPage })));
+const AiAutomationPage = React.lazy(() => import("./components/WorkPages").then(m => ({ default: m.AiAutomationPage })));
+
+const InsightsMainPage = React.lazy(() => import("./components/InsightsPage").then(m => ({ default: m.InsightsMainPage })));
+const DynamicInsightPage = React.lazy(() => import("./components/InsightsPage").then(m => ({ default: m.DynamicInsightPage })));
+const GrowthInsightPage = React.lazy(() => import("./components/InsightsPage").then(m => ({ default: m.GrowthInsightPage })));
+const AdsInsightPage = React.lazy(() => import("./components/InsightsPage").then(m => ({ default: m.AdsInsightPage })));
+const AiInsightPage = React.lazy(() => import("./components/InsightsPage").then(m => ({ default: m.AiInsightPage })));
+const LogoInsightPage = React.lazy(() => import("./components/InsightsPage").then(m => ({ default: m.LogoInsightPage })));
+
+const ReviewSlider = React.lazy(() => import("./components/ReviewSlider").then(m => ({ default: m.ReviewSlider })));
+const ReviewPage = React.lazy(() => import("./components/ReviewPage").then(m => ({ default: m.ReviewPage })));
+const AdminDashboard = React.lazy(() => import("./components/AdminDashboard"));
+const BookingPage = React.lazy(() => import("./components/BookingPage"));
+const GetNoticedPage = React.lazy(() => import("./components/GetNoticedPage"));
+
+const PrivacyPolicyPage = React.lazy(() => import("./components/LegalPages").then(m => ({ default: m.PrivacyPolicyPage })));
+const DisclaimerPage = React.lazy(() => import("./components/LegalPages").then(m => ({ default: m.DisclaimerPage })));
+const TermsAndConditionsPage = React.lazy(() => import("./components/LegalPages").then(m => ({ default: m.TermsAndConditionsPage })));
+const RefundPolicyPage = React.lazy(() => import("./components/LegalPages").then(m => ({ default: m.RefundPolicyPage })));
+const founderImg = "https://lh3.googleusercontent.com/d/1wi-T5j_PnN3q25tH7deSXSfJtx9QP21a=w600";
+const cofounderImg = "https://lh3.googleusercontent.com/d/1hBpdobTGgekI5lVIS7Uf82QYEYoo0kPX=w600";
+const operationsImg = "https://lh3.googleusercontent.com/d/15OeeOpS-o-knj0lgSiKclDxg_UJVNSat=w600";
 import { 
   TrendingUp, 
   Flame, 
@@ -210,6 +231,7 @@ export default function App() {
         onSuccess={onLoginSuccess}
       />
       <AnimatePresence mode="wait">
+        <Suspense fallback={<div className="min-h-screen flex items-center justify-center bg-white"><div className="w-12 h-12 border-4 border-accent-yellow border-t-transparent rounded-full animate-spin"></div></div>}>
         {currentPage === "admin" ? (
           <motion.div
             key="admin"
@@ -932,6 +954,7 @@ export default function App() {
             </footer>
           </div>
         )}
+        </Suspense>
       </AnimatePresence>
     </div>
   );
