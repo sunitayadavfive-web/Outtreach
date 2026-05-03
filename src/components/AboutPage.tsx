@@ -89,8 +89,8 @@ export function TeamMemberCard({ name, role, image, description, instagram, link
         </AnimatePresence>
       </div>
       <h3 className="text-[15px] md:text-2xl mb-1 md:mb-2 font-display font-bold text-white">{name}</h3>
-      <p className="text-[10px] md:text-sm text-gray-400 max-w-[250px] mx-auto italic hidden md:block">{description}</p>
-      {!isActive && <p className="text-[10px] uppercase tracking-widest font-black text-[#FFEB00] mt-1 md:hidden opacity-90">Tap to see social</p>}
+      <p className="text-[10px] md:text-sm text-gray-400 max-w-[250px] mx-auto italic">{description}</p>
+      {!isActive && <p className="text-[9px] md:text-[10px] uppercase tracking-widest font-black text-[#FFEB00] mt-2 md:hidden opacity-90">Tap to see social</p>}
     </div>
   );
 }
