@@ -13,9 +13,9 @@ import {
   ArrowLeft
 } from "lucide-react";
 import { AnimatePresence } from "motion/react";
-import founderImg from "../assets/pranjal_yadav.jpg";
-import cofounderImg from "../assets/anubhav_singh.jpg";
-import operationsImg from "../assets/prashant_yadav.jpg";
+import founderImg from "../assets/pranjal_yadav.png";
+import cofounderImg from "../assets/anubhav_singh.png";
+import operationsImg from "../assets/prashant_yadav.png";
 
 interface TeamMemberProps {
   name: string;
