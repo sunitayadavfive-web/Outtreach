@@ -98,6 +98,27 @@ export default function App() {
   const [publicInsights, setPublicInsights] = useState<any[]>([]);
 
   useEffect(() => {
+    document.title = "Outtreach – Growth Marketing Agency in Lucknow | SEO, Paid Ads & Branding";
+    
+    const setMetaTag = (property: string, content: string, isName = true) => {
+      let meta = document.querySelector(`meta[${isName ? 'name' : 'property'}="${property}"]`);
+      if (!meta) {
+        meta = document.createElement('meta');
+        meta.setAttribute(isName ? 'name' : 'property', property);
+        document.head.appendChild(meta);
+      }
+      meta.setAttribute('content', content);
+    };
+
+    setMetaTag('description', "Outtreach is Lucknow's top Growth Marketing Agency. We help brands scale with SEO, paid ads, social media, branding & AI automation. Get results in 90 days.");
+    setMetaTag('keywords', "growth marketing agency Lucknow, SEO agency India, paid ads agency, social media marketing, branding agency");
+    setMetaTag('og:title', "Outtreach | Growth Marketing Agency", false);
+    setMetaTag('og:description', "We make brands LOUD. Silence Out. Spotlight In.", false);
+    setMetaTag('og:type', "website", false);
+    setMetaTag('og:url', window.location.href, false);
+  }, [currentPage]);
+
+  useEffect(() => {
     const lenis = new Lenis({
       duration: 1.2,
       easing: (t) => Math.min(1, 1.001 - Math.pow(2, -10 * t)), // https://www.desmos.com/calculator/brs54l4xou

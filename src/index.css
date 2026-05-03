@@ -1,5 +1,49 @@
 @import "tailwindcss";
 
+/* 1. CSS reset with box-sizing border-box */
+*, *::before, *::after {
+  box-sizing: border-box;
+}
+
+/* 2. Performance styles: img and video lazy load ready, max-width 100%, height auto */
+img, video {
+  max-width: 100%;
+  height: auto;
+  display: block;
+}
+
+/* 3. smooth scroll behavior on html */
+/* 6. Mobile first base font size (16px) */
+/* 7. -webkit-text-size-adjust: 100% */
+html {
+  scroll-behavior: smooth;
+  font-size: 16px;
+  -webkit-text-size-adjust: 100%;
+}
+
+/* 4. Font-display swap ready styles */
+/* 8. Core Web Vitals friendly: no layout shifts, no invisible text during font load */
+@font-face {
+  font-family: 'DM Sans';
+  font-display: swap;
+  src: local('DM Sans');
+}
+@font-face {
+  font-family: 'Anton';
+  font-display: swap;
+  src: local('Anton');
+}
+@font-face {
+  font-family: 'Space Mono';
+  font-display: swap;
+  src: local('Space Mono');
+}
+
+/* 5. Prevent layout shift with min-height on common elements */
+body, main, section {
+  min-height: 100vh;
+}
+
 @theme {
   --font-sans: "DM Sans", ui-sans-serif, system-ui, sans-serif;
   --font-display: "Anton", sans-serif;
