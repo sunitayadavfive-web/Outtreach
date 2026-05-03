@@ -628,7 +628,7 @@ export default function App() {
                         <div className="absolute inset-0 bg-gradient-to-t from-white via-white/40 to-transparent z-20" />
                       </div>
 
-                      <div className="p-4 md:p-10 flex-col flex flex-1 relative z-30 -mt-6 md:-mt-12">
+                      <div className="p-4 md:p-10 flex-col flex flex-1 relative z-30">
                         <div className="flex justify-between items-center mb-3 md:mb-6">
                           <div className="flex items-center gap-1.5 md:gap-3">
                             <div className="bg-white p-1.5 md:p-2.5 rounded-lg md:rounded-xl border border-black/5 group-hover:border-accent-yellow transition-colors shadow-sm">
@@ -638,7 +638,7 @@ export default function App() {
                           </div>
                         </div>
                         
-                        <h3 className="text-[16px] md:text-3xl leading-snug text-text-black font-black pr-1 md:pr-4 mb-4 md:mb-8">
+                        <h3 className="text-xl md:text-3xl leading-tight text-text-black font-display uppercase tracking-tight pr-1 md:pr-4 mb-4 md:mb-8">
                            {post.title}
                         </h3>
                         
@@ -669,7 +669,7 @@ export default function App() {
                         <div className="absolute inset-0 bg-gradient-to-t from-white via-white/40 to-transparent z-20" />
                       </div>
 
-                      <div className="p-4 md:p-10 flex-col flex flex-1 relative z-30 -mt-6 md:-mt-12">
+                      <div className="p-4 md:p-10 flex-col flex flex-1 relative z-30">
                         <div className="flex justify-between items-center mb-3 md:mb-6">
                           <div className="flex items-center gap-1.5 md:gap-3">
                             <div className="bg-white p-1.5 md:p-2.5 rounded-lg md:rounded-xl border border-black/5 group-hover:border-accent-yellow transition-colors shadow-sm">
@@ -679,7 +679,7 @@ export default function App() {
                           </div>
                         </div>
                         
-                        <h3 className="text-[16px] md:text-3xl leading-snug text-text-black font-black pr-1 md:pr-4 mb-4 md:mb-8">
+                        <h3 className="text-xl md:text-3xl leading-tight text-text-black font-display uppercase tracking-tight pr-1 md:pr-4 mb-4 md:mb-8">
                            {post.title}
                         </h3>
                         

@@ -868,7 +868,7 @@ export function InsightsMainPage({ onBack, onNavigate }: { onBack: () => void, o
                  <div className="absolute inset-0 bg-gradient-to-t from-[#111111] via-[#111111]/80 to-transparent z-20" />
                </div>
 
-               <div className="p-6 md:p-10 flex-col flex flex-1 relative z-30 -mt-10 md:-mt-12">
+               <div className="p-6 md:p-10 flex-col flex flex-1 relative z-30">
                  <div className="flex justify-between items-center mb-4 md:mb-6">
                    <div className="flex items-center gap-2 md:gap-3">
                      <div className="bg-black/80 p-2 md:p-2.5 rounded-xl border border-white/10 group-hover:border-[#FFE600]/30 transition-colors backdrop-blur-md">
@@ -879,7 +879,7 @@ export function InsightsMainPage({ onBack, onNavigate }: { onBack: () => void, o
                    <span className="text-[9px] md:text-[10px] uppercase tracking-widest font-bold text-white/50 bg-black/60 px-2 md:px-3 py-1 md:py-1.5 rounded-full backdrop-blur-md border border-white/5">{post.readTime} READ</span>
                  </div>
                  
-                 <h3 className="text-xl md:text-2xl lg:text-3xl leading-snug text-white font-bold tracking-normal pr-4 mb-6 md:mb-8 relative z-10">
+                 <h3 className="text-2xl md:text-3xl lg:text-4xl leading-tight text-white font-display tracking-tight uppercase pr-4 mb-6 md:mb-8 relative z-10">
                     {post.title}
                  </h3>
                  
@@ -911,7 +911,7 @@ export function InsightsMainPage({ onBack, onNavigate }: { onBack: () => void, o
                  <div className="absolute inset-0 bg-gradient-to-t from-[#111111] via-[#111111]/80 to-transparent z-20" />
                </div>
 
-               <div className="p-6 md:p-10 flex-col flex flex-1 relative z-30 -mt-10 md:-mt-12">
+               <div className="p-6 md:p-10 flex-col flex flex-1 relative z-30">
                  <div className="flex justify-between items-center mb-4 md:mb-6">
                    <div className="flex items-center gap-2 md:gap-3">
                      <div className="bg-black/80 p-2 md:p-2.5 rounded-xl border border-white/10 group-hover:border-[#FFE600]/30 transition-colors backdrop-blur-md">
@@ -922,7 +922,7 @@ export function InsightsMainPage({ onBack, onNavigate }: { onBack: () => void, o
                    <span className="text-[9px] md:text-[10px] uppercase tracking-widest font-bold text-white/50 bg-black/60 px-2 md:px-3 py-1 md:py-1.5 rounded-full backdrop-blur-md border border-white/5">5 MIN READ</span>
                  </div>
                  
-                 <h3 className="text-xl md:text-2xl lg:text-3xl leading-snug text-white font-bold tracking-normal pr-4 mb-6 md:mb-8 relative z-10">
+                 <h3 className="text-2xl md:text-3xl lg:text-4xl leading-tight text-white font-display tracking-tight uppercase pr-4 mb-6 md:mb-8 relative z-10">
                     {post.title}
                  </h3>
                  
