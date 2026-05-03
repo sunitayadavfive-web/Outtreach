@@ -27,9 +27,16 @@
   }
 }
 
-.ticker-animation {
-  display: inline-block;
-  animation: ticker 30s linear infinite;
+@keyframes ticker {
+  0% { transform: translateX(0); }
+  100% { transform: translateX(-50%); }
+}
+
+@media (min-width: 768px) {
+  .ticker-animation {
+    display: inline-block;
+    animation: ticker 30s linear infinite;
+  }
 }
 
 @keyframes shake {

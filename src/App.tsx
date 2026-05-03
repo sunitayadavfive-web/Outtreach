@@ -370,16 +370,16 @@ export default function App() {
             </section>
 
             {/* Ticker */}
-            <div className="bg-text-black py-4 overflow-hidden whitespace-nowrap font-display">
-              <div className="ticker-animation inline-block">
+            <div className="bg-text-black py-3 md:py-4 overflow-x-auto md:overflow-hidden whitespace-nowrap font-display hide-scrollbar">
+              <div className="ticker-animation inline-block min-w-max">
                 {[1, 2].map((i) => (
                   <div key={i} className="inline-block">
-                    <span className="text-2xl text-accent-yellow mx-10">SILENCE OUT • SPOTLIGHT IN</span>
-                    <span className="text-2xl text-accent-yellow mx-10">WE MAKE BRANDS LOUD</span>
-                    <span className="text-2xl text-accent-yellow mx-10">GROWTH MARKETING</span>
-                    <span className="text-2xl text-accent-yellow mx-10">BRAND IDENTITY</span>
-                    <span className="text-2xl text-accent-yellow mx-10">SOCIAL MEDIA</span>
-                    <span className="text-2xl text-accent-yellow mx-10">PAID ADS</span>
+                    <span className="text-base md:text-2xl text-accent-yellow mx-4 md:mx-10 inline-block align-middle">SILENCE OUT • SPOTLIGHT IN</span>
+                    <span className="text-base md:text-2xl text-accent-yellow mx-4 md:mx-10 inline-block align-middle">WE MAKE BRANDS LOUD</span>
+                    <span className="text-base md:text-2xl text-accent-yellow mx-4 md:mx-10 inline-block align-middle">GROWTH MARKETING</span>
+                    <span className="text-base md:text-2xl text-accent-yellow mx-4 md:mx-10 inline-block align-middle">BRAND IDENTITY</span>
+                    <span className="text-base md:text-2xl text-accent-yellow mx-4 md:mx-10 inline-block align-middle">SOCIAL MEDIA</span>
+                    <span className="text-base md:text-2xl text-accent-yellow mx-4 md:mx-10 inline-block align-middle">PAID ADS</span>
                   </div>
                 ))}
               </div>
@@ -868,6 +868,9 @@ export default function App() {
                     </a>
                     <a href="tel:+918303984556" className="flex items-center gap-3 hover:text-accent-yellow transition-colors">
                       <Phone className="w-4 h-4" /> (+91) 83039 84556
+                    </a>
+                    <a href="tel:+917985132882" className="flex items-center gap-3 hover:text-accent-yellow transition-colors">
+                      <Phone className="w-4 h-4" /> (+91) 79851 32882
                     </a>
                     <p className="flex items-center gap-3">
                       <MapPin className="w-4 h-4" /> Lucknow, India
