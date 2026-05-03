@@ -365,7 +365,7 @@ export default function AdminDashboard({ onBack }: AdminDashboardProps) {
                   <div className="bg-neutral-50 p-3 rounded-lg border border-black/5">
                     <p className="text-[9px] uppercase font-bold tracking-widest opacity-30 mb-1">Preview</p>
                     <p className="text-sm font-medium truncate opacity-70">
-                        {item.goals || item.problem || item.text || (item.sections?.[0]?.content) || "No preview available."}
+                        {item.goals || item.problem || item.comment || item.text || (item.sections?.[0]?.content) || "No preview available."}
                     </p>
                   </div>
                 </div>
@@ -473,6 +473,18 @@ export default function AdminDashboard({ onBack }: AdminDashboardProps) {
                             ))}
                         </div>
                     </>
+                ) : activeTab === 'reviews' ? (
+                  <>
+                    <div className="flex items-center gap-4 mb-6">
+                      <span className="bg-black text-white text-[10px] px-3 py-1 font-bold uppercase rounded-full">Rating: {selectedItem.rating} Stars</span>
+                    </div>
+                    <div>
+                      <p className="text-[10px] uppercase font-bold tracking-[0.2em] text-neutral-400 mb-3 border-l-4 border-accent-yellow pl-3">Review Content</p>
+                      <div className="bg-neutral-50 p-8 rounded-xl border border-black/5 text-xl font-medium leading-relaxed italic">
+                        "{selectedItem.comment}"
+                      </div>
+                    </div>
+                  </>
                 ) : (
                   <>
                     <div className="flex items-center gap-4 mb-6">

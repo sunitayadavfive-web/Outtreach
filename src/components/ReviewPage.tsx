@@ -252,7 +252,7 @@ export function ReviewPage({ onBack, isAdmin = false }: { onBack: () => void, is
                     <p className="text-white/70 text-sm leading-relaxed font-medium italic">"{rev.comment}"</p>
                     <div className="flex justify-between items-center mt-4">
                       <div className="text-[9px] font-black text-white/20 uppercase tracking-widest">
-                        {rev.createdAt?.toDate().toLocaleDateString() || 'Just now'}
+                        {rev.createdAt ? new Date(typeof rev.createdAt === 'string' ? rev.createdAt : typeof rev.createdAt === 'object' && 'toDate' in rev.createdAt ? rev.createdAt.toDate() : rev.createdAt).toLocaleDateString() : 'Just now'}
                       </div>
                       <div className="text-[8px] font-black text-accent-yellow/40 uppercase tracking-[0.2em] flex items-center gap-1.5">
                         <CheckCircle className="w-2.5 h-2.5" /> VERIFIED

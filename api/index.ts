@@ -290,6 +290,9 @@ app.post("/api/reviews", async (req, res) => {
       (newReview as any).id = Date.now().toString();
   }
 
+  const emailHtml = getEmailTemplate("New Review Received", `<p>Incoming review from ${newReview.name}</p><p>Rating: ${newReview.rating} Stars</p><p>${newReview.comment}</p>`);
+  await sendEmailNotification(`REVIEW: ${newReview.rating} Stars from ${newReview.name}`, emailHtml);
+
   res.status(201).json(newReview);
 });
 
