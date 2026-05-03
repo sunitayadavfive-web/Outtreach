@@ -614,17 +614,19 @@ export default function App() {
                   ].map((post, idx) => (
                     <motion.div 
                       key={idx} 
-                      whileHover={{ y: -8 }}
+                      whileHover={{ y: -12, scale: 1.02 }}
+                      transition={{ type: "spring", stiffness: 300, damping: 20 }}
                       onClick={() => {
                         if (post.id === "logo") setCurrentPage("insight-logo");
                         if (post.id === "growth") setCurrentPage("insight-growth");
                         if (post.id === "ads") setCurrentPage("insight-ads");
                       }}
-                      className="bg-white rounded-xl md:rounded-3xl border border-black/5 hover:border-accent-yellow/50 hover:shadow-[0_20px_40px_rgba(0,0,0,0.06)] transition-all duration-500 group cursor-pointer flex flex-col relative overflow-hidden"
+                      className="bg-white rounded-xl md:rounded-3xl border-2 border-transparent hover:border-accent-yellow hover:shadow-[0_30px_60px_rgba(255,235,0,0.15)] shadow-[0_10px_30px_rgba(0,0,0,0.04)] transition-all duration-500 group cursor-pointer flex flex-col relative overflow-hidden"
+                      style={{ transformStyle: 'preserve-3d', perspective: '1000px' }}
                     >
-                      <div className="h-28 md:h-56 w-full overflow-hidden relative">
+                      <div className="h-48 md:h-64 w-full overflow-hidden relative">
                         <div className="absolute inset-0 bg-black/10 group-hover:bg-transparent transition-colors duration-500 z-10" />
-                        <img referrerPolicy="no-referrer" src={post.image} loading="lazy" alt={post.title} className="w-full h-full object-cover transform group-hover:scale-105 transition-transform duration-700 ease-out" />
+                        <img referrerPolicy="no-referrer" src={post.image} loading="lazy" alt={post.title} className="w-full h-full object-cover transform group-hover:scale-[1.15] transition-transform duration-700 ease-out" />
                         <div className="absolute inset-0 bg-gradient-to-t from-white via-white/40 to-transparent z-20" />
                       </div>
 
@@ -656,16 +658,18 @@ export default function App() {
                   {publicInsights.slice(0, 3).map((post, idx) => (
                     <motion.div 
                       key={post.id || `dynamic-${idx}`} 
-                      whileHover={{ y: -8 }}
+                      whileHover={{ y: -12, scale: 1.02 }}
+                      transition={{ type: "spring", stiffness: 300, damping: 20 }}
                       onClick={() => {
                         setActivePost(post);
                         setCurrentPage("insight-dynamic");
                       }}
-                      className="bg-white rounded-xl md:rounded-3xl border border-black/5 hover:border-accent-yellow/50 hover:shadow-[0_20px_40px_rgba(0,0,0,0.06)] transition-all duration-500 group cursor-pointer flex flex-col relative overflow-hidden"
+                      className="bg-white rounded-xl md:rounded-3xl border-2 border-transparent hover:border-accent-yellow hover:shadow-[0_30px_60px_rgba(255,235,0,0.15)] shadow-[0_10px_30px_rgba(0,0,0,0.04)] transition-all duration-500 group cursor-pointer flex flex-col relative overflow-hidden"
+                      style={{ transformStyle: 'preserve-3d', perspective: '1000px' }}
                     >
-                      <div className="h-28 md:h-56 w-full overflow-hidden relative">
+                      <div className="h-48 md:h-64 w-full overflow-hidden relative">
                         <div className="absolute inset-0 bg-black/10 group-hover:bg-transparent transition-colors duration-500 z-10" />
-                        <img referrerPolicy="no-referrer" src={post.coverImage || "https://images.unsplash.com/photo-1551288049-bebda4e38f71?q=80&w=800&auto=format&fit=crop"} loading="lazy" alt={post.title} className="w-full h-full object-cover transform group-hover:scale-105 transition-transform duration-700 ease-out" />
+                        <img referrerPolicy="no-referrer" src={post.coverImage || "https://images.unsplash.com/photo-1551288049-bebda4e38f71?q=80&w=800&auto=format&fit=crop"} loading="lazy" alt={post.title} className="w-full h-full object-cover transform group-hover:scale-[1.15] transition-transform duration-700 ease-out" />
                         <div className="absolute inset-0 bg-gradient-to-t from-white via-white/40 to-transparent z-20" />
                       </div>
 
