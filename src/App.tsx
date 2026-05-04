@@ -28,6 +28,7 @@ const GrowthInsightPage = React.lazy(() => import("./components/InsightsPage").t
 const AdsInsightPage = React.lazy(() => import("./components/InsightsPage").then(m => ({ default: m.AdsInsightPage })));
 const AiInsightPage = React.lazy(() => import("./components/InsightsPage").then(m => ({ default: m.AiInsightPage })));
 const LogoInsightPage = React.lazy(() => import("./components/InsightsPage").then(m => ({ default: m.LogoInsightPage })));
+const SeoInsightPage = React.lazy(() => import("./components/InsightsPage").then(m => ({ default: m.SeoInsightPage })));
 
 const ReviewSlider = React.lazy(() => import("./components/ReviewSlider").then(m => ({ default: m.ReviewSlider })));
 const ReviewPage = React.lazy(() => import("./components/ReviewPage").then(m => ({ default: m.ReviewPage })));
@@ -627,11 +628,12 @@ export default function App() {
                   </button>
                 </div>
                 
-                <div className="grid grid-cols-2 md:grid-cols-2 lg:grid-cols-3 gap-3 md:gap-8">
+                <div className="grid grid-cols-2 md:grid-cols-2 lg:grid-cols-4 gap-3 md:gap-8">
                   {[
                     { category: "Growth Marketing", title: "Why Most Small Brands Fail at Social Media", id: "growth", readTime: "10 min", icon: <TrendingUp className="text-black w-4 h-4 md:w-5 md:h-5" />, image: "https://images.unsplash.com/photo-1611162617474-5b21e879e113?q=80&w=800&auto=format&fit=crop" },
                     { category: "Brand Identity", title: "Your Logo Isn't Your Brand", id: "logo", readTime: "6 min", icon: <Target className="text-black w-4 h-4 md:w-5 md:h-5" />, image: "https://images.unsplash.com/photo-1558655146-d09347e92766?q=80&w=800&auto=format&fit=crop" },
-                    { category: "Paid Ads", title: "How to make ₹10k work like ₹50k", id: "ads", readTime: "7 min", icon: <Flame className="text-black w-4 h-4 md:w-5 md:h-5" />, image: "https://images.unsplash.com/photo-1460925895917-afdab827c52f?q=80&w=800&auto=format&fit=crop" }
+                    { category: "Paid Ads", title: "How to make ₹10k work like ₹50k", id: "ads", readTime: "7 min", icon: <Flame className="text-black w-4 h-4 md:w-5 md:h-5" />, image: "https://images.unsplash.com/photo-1460925895917-afdab827c52f?q=80&w=800&auto=format&fit=crop" },
+                    { category: "SEO & Growth", title: "Why every small business in Lucknow needs SEO in 2025", id: "seo", readTime: "8 min", icon: <Lightbulb className="text-black w-4 h-4 md:w-5 md:h-5" />, image: "https://images.unsplash.com/photo-1432888498266-38ffec3eaf0a?q=80&w=800&auto=format&fit=crop" }
                   ].map((post, idx) => (
                     <motion.div 
                       key={idx} 
@@ -641,6 +643,7 @@ export default function App() {
                         if (post.id === "logo") setCurrentPage("insight-logo");
                         if (post.id === "growth") setCurrentPage("insight-growth");
                         if (post.id === "ads") setCurrentPage("insight-ads");
+                        if (post.id === "seo") setCurrentPage("insight-seo");
                       }}
                       className="bg-white rounded-xl md:rounded-3xl border-2 border-transparent hover:border-accent-yellow hover:shadow-[0_30px_60px_rgba(255,235,0,0.15)] shadow-[0_10px_30px_rgba(0,0,0,0.04)] transition-all duration-500 group cursor-pointer flex flex-col relative overflow-hidden"
                       style={{ transformStyle: 'preserve-3d', perspective: '1000px' }}
@@ -868,6 +871,16 @@ export default function App() {
               onBack={() => setCurrentPage("home")} 
               comments={commentsByPost.ai || []}
               addComment={addComment("ai")}
+              commentInput={commentInput}
+              setCommentInput={setCommentInput}
+              setCurrentPage={setCurrentPage}
+              setShowPasswordModal={setShowPasswordModal}
+            />
+          ) : currentPage === "insight-seo" ? (
+            <SeoInsightPage 
+              onBack={() => setCurrentPage("home")} 
+              comments={commentsByPost.seo || []}
+              addComment={addComment("seo")}
               commentInput={commentInput}
               setCommentInput={setCommentInput}
               setCurrentPage={setCurrentPage}

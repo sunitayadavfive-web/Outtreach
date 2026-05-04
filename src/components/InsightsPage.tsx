@@ -32,7 +32,7 @@ export function GrowthInsightPage({ onBack, comments = [], addComment, commentIn
 
       <article className="pt-32 pb-24 px-[5%] max-w-4xl mx-auto">
         <span className="font-mono text-[10px] md:text-xs text-muted-gray uppercase tracking-widest block mb-4">Growth Marketing • 10 min read</span>
-        <h1 className="text-3xl md:text-7xl mb-10 leading-tight font-black uppercase tracking-tighter">Why Most Small Brands Fail at Social Media.</h1>
+        <h1 className="text-4xl md:text-5xl lg:text-6xl mb-10 leading-[1.1] font-black uppercase tracking-tight text-balance">Why Most Small Brands Fail at Social Media.</h1>
         
         <img 
           src="https://images.unsplash.com/photo-1611162617474-5b21e879e113?auto=format&fit=crop&q=80&w=1500" 
@@ -276,7 +276,7 @@ export function AdsInsightPage({ onBack, comments = [], addComment, commentInput
 
       <article className="pt-32 pb-24 px-[5%] max-w-4xl mx-auto">
         <span className="font-mono text-[10px] md:text-xs text-muted-gray uppercase tracking-widest block mb-4">Paid Ads • 7 min read</span>
-        <h1 className="text-3xl md:text-7xl mb-10 leading-tight font-black uppercase tracking-tighter">How to make ₹10k work like ₹50k.</h1>
+        <h1 className="text-4xl md:text-5xl lg:text-6xl mb-10 leading-[1.1] font-black uppercase tracking-tight text-balance">How to make ₹10k work like ₹50k.</h1>
         
         <img 
           src="https://images.unsplash.com/photo-1460925895917-afdab827c52f?auto=format&fit=crop&q=80&w=1500" 
@@ -514,7 +514,7 @@ export function AiInsightPage({ onBack, comments = [], addComment, commentInput,
 
       <article className="pt-32 pb-24 px-[5%] max-w-4xl mx-auto">
         <span className="font-mono text-[10px] md:text-xs text-muted-gray uppercase tracking-widest block mb-4">AI Automation • 5 min read</span>
-        <h1 className="text-3xl md:text-7xl mb-10 leading-tight font-black uppercase tracking-tighter">AI Automation: The Secret Weapon for Scaling.</h1>
+        <h1 className="text-4xl md:text-5xl lg:text-6xl mb-10 leading-[1.1] font-black uppercase tracking-tight text-balance">AI Automation: The Secret Weapon for Scaling.</h1>
         
         <img 
           src="https://images.unsplash.com/photo-1677442135136-760c813028c0?auto=format&fit=crop&q=80&w=1500" 
@@ -666,7 +666,7 @@ export function LogoInsightPage({ onBack, comments = [], addComment, commentInpu
 
       <article className="pt-32 pb-24 px-[5%] max-w-4xl mx-auto">
         <span className="font-mono text-[10px] md:text-xs text-muted-gray uppercase tracking-widest block mb-4">Brand Identity • 6 min read</span>
-        <h1 className="text-3xl md:text-7xl mb-10 leading-tight font-black uppercase tracking-tighter">Your Logo Isn't Your Brand.</h1>
+        <h1 className="text-4xl md:text-5xl lg:text-6xl mb-10 leading-[1.1] font-black uppercase tracking-tight text-balance">Your Logo Isn't Your Brand.</h1>
         
         <img 
           src="https://images.unsplash.com/photo-1542744173-8e7e53415bb0?auto=format&fit=crop&q=80&w=1500" 
@@ -962,7 +962,7 @@ export function DynamicInsightPage({ onBack, post }: { onBack: () => void, post:
 
         <div className="mb-10 md:mb-16">
           <span className="font-mono text-[10px] md:text-xs text-[#FFE600] uppercase tracking-widest font-bold block mb-4 md:mb-6">{post.category} • {new Date(post.createdAt || Date.now()).toLocaleDateString()}</span>
-          <h1 className="text-3xl md:text-7xl mb-6 md:mb-8 leading-tight font-black uppercase tracking-tighter">{post.title}</h1>
+          <h1 className="text-4xl md:text-5xl lg:text-6xl mb-6 md:mb-8 leading-[1.1] font-black uppercase tracking-tight text-balance">{post.title}</h1>
           <div className="w-16 md:w-24 h-1.5 md:h-2 bg-[#FFE600] rounded-full mt-6 md:mt-8 mb-10 md:mb-12"></div>
         </div>
 
@@ -1012,6 +1012,210 @@ export function DynamicInsightPage({ onBack, post }: { onBack: () => void, post:
              <ArrowLeft className="w-4 h-4 md:w-5 md:h-5 group-hover:-translate-x-2 transition-transform text-[#FFE600]" /> BACK TO INSIGHTS
            </button>
         </div>
+      </article>
+    </motion.div>
+  );
+}
+
+export function SeoInsightPage({ onBack, comments = [], addComment, commentInput, setCommentInput, setCurrentPage, setShowPasswordModal }: { 
+  onBack: () => void, 
+  comments: any[], 
+  addComment: (e: React.FormEvent) => void,
+  commentInput: {name: string, text: string},
+  setCommentInput: (val: any) => void,
+  setCurrentPage: (page: string) => void,
+  setShowPasswordModal: (show: boolean) => void,
+  key?: string
+}) {
+  useEffect(() => { window.scrollTo(0, 0); }, []);
+
+  const safeComments = comments || [];
+
+  return (
+    <motion.div 
+      initial={{ opacity: 0 }}
+      animate={{ opacity: 1 }}
+      exit={{ opacity: 0 }}
+      className="bg-white min-h-screen text-black"
+    >
+      <header className="fixed top-0 w-full bg-white/95 backdrop-blur-md z-50 border-b border-black/5 py-4 px-[5%] flex justify-between items-center">
+        <button onClick={onBack} className="flex items-center gap-2 font-bold uppercase text-sm hover:translate-x-[-4px] transition-transform text-black">
+          <ArrowLeft className="w-4 h-4 text-black" /> Back to Insights
+        </button>
+        <div className="bg-accent-yellow px-4 py-1 text-xl font-display font-bold text-black">OUTTREACH</div>
+      </header>
+
+      <article className="pt-32 pb-24 px-[5%] max-w-4xl mx-auto">
+        <span className="font-mono text-[10px] md:text-xs text-black/60 uppercase tracking-widest block mb-4 font-bold">SEO & Organic Growth • 8 min read</span>
+        <h1 className="text-4xl md:text-5xl lg:text-6xl mb-10 leading-[1.1] font-black uppercase tracking-tight text-balance text-black">
+          Why every small business in Lucknow needs SEO in 2025
+        </h1>
+        
+        <div className="w-24 h-2 bg-accent-yellow mb-12"></div>
+
+        <img 
+          src="https://images.unsplash.com/photo-1432888498266-38ffec3eaf0a?q=80&w=1500&auto=format&fit=crop" 
+          alt="SEO for small business Lucknow" 
+          className="w-full aspect-[16/9] md:aspect-[21/9] object-cover mb-12 rounded-2xl shadow-lg border border-black/5"
+          referrerPolicy="no-referrer"
+        />
+
+        <div className="prose prose-lg md:prose-xl max-w-none text-black/80 space-y-10 md:space-y-12 font-sans leading-relaxed text-sm md:text-base">
+          <p className="text-xl md:text-2xl font-medium italic border-l-4 border-accent-yellow pl-6 text-black">
+            The business landscape in our city is shifting rapidly. If your customers can't find you on Google, your competitors will gladly take your place. Here is a definitive guide on why investing in SEO is no longer optional.
+          </p>
+
+          <section>
+            <h2 className="text-3xl font-display uppercase tracking-tight text-black mb-6">What is SEO in Simple Words?</h2>
+            <p className="mb-4">
+              Imagine opening a beautiful shop in Hazratganj or Gomti Nagar but forgetting to put up a signboard. People walking by won't know what you sell. <strong>SEO (Search Engine Optimization)</strong> is your digital signboard. It ensures that when someone searches for your products or services on Google, your website shows up at the top.
+            </p>
+            <p>
+              When we talk about effective strategies, <strong>SEO for small business Lucknow</strong> is simply the process of making your website friendly for local customers. If someone searches "best interior designer near me" or "affordable CA in Lucknow", SEO is the magic that brings your business to their screen before they see anyone else.
+            </p>
+          </section>
+
+          <section>
+            <h2 className="text-3xl font-display uppercase tracking-tight text-black mb-6">Why Lucknow Businesses Need It Now</h2>
+            <p className="mb-4">
+              Lucknow is growing faster than ever. We're seeing new startups, cafes, clinics, and service providers opening every week. Traditional marketing like newspaper ads or hoarding boards are becoming highly expensive and harder to track. Meanwhile, almost every consumer in Lucknow now checks Google reviews, searches for local services on their smartphone, and verifies a business online before making a purchase.
+            </p>
+            <p>
+              This shift in consumer behavior means that <strong>SEO for small business Lucknow</strong> is the most practical way to capture high-intent customers. These are people actively looking to buy what you sell. If you are not on the first page of Google, you are leaving money on the table for your competitors to grab.
+            </p>
+          </section>
+
+          <section>
+            <h2 className="text-3xl font-display uppercase tracking-tight text-black mb-6">5 Benefits of SEO for Small Business</h2>
+            <p className="mb-6">Investing in local search visibility yields massive returns over time. Here are five undeniable benefits:</p>
+            
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-6 mb-8 text-black">
+              <div className="bg-neutral-50 p-6 border border-black/5 rounded-xl">
+                <h3 className="text-xl font-bold mb-3 flex items-center gap-2"><Target className="text-accent-yellow w-5 h-5" /> 1. Targeted Local Traffic</h3>
+                <p className="text-sm">You don't just get visitors; you get people in your city who are ready to buy. Local SEO puts you on Google Maps and local search results.</p>
+              </div>
+              <div className="bg-neutral-50 p-6 border border-black/5 rounded-xl">
+                <h3 className="text-xl font-bold mb-3 flex items-center gap-2"><TrendingUp className="text-accent-yellow w-5 h-5" /> 2. Cost-Effective Growth</h3>
+                <p className="text-sm">Unlike paid ads where traffic stops the moment you stop paying, SEO provides long-term, sustainable visibility that compounds over months and years.</p>
+              </div>
+              <div className="bg-neutral-50 p-6 border border-black/5 rounded-xl">
+                <h3 className="text-xl font-bold mb-3 flex items-center gap-2"><Lock className="text-accent-yellow w-5 h-5" /> 3. Enhanced Trust and Credibility</h3>
+                <p className="text-sm">Consumers trust Google. When your business ranks at the top page for your industry, it automatically builds instant credibility in the minds of your buyers.</p>
+              </div>
+              <div className="bg-neutral-50 p-6 border border-black/5 rounded-xl">
+                <h3 className="text-xl font-bold mb-3 flex items-center gap-2"><Zap className="text-accent-yellow w-5 h-5" /> 4. Edge Over Competitors</h3>
+                <p className="text-sm">Many local businesses are still relying entirely on word-of-mouth. By implementing <strong>SEO for small business Lucknow</strong>, you easily outrank slower-moving competitors.</p>
+              </div>
+              <div className="bg-neutral-50 p-6 border border-black/5 rounded-xl md:col-span-2">
+                <h3 className="text-xl font-bold mb-3 flex items-center gap-2"><Lightbulb className="text-accent-yellow w-5 h-5" /> 5. Better User Experience</h3>
+                <p className="text-sm">Good SEO isn't just about keywords; it's about making your website faster, mobile-friendly, and easier to read. A great site experience turns visitors into paying customers.</p>
+              </div>
+            </div>
+          </section>
+
+          <img 
+            src="https://images.unsplash.com/photo-1460925895917-afdab827c52f?q=80&w=1500&auto=format&fit=crop" 
+            alt="Data and Analytics for small business" 
+            className="w-full aspect-video object-cover my-12 rounded-xl shadow-lg border border-black/5"
+            referrerPolicy="no-referrer"
+          />
+
+          <section>
+            <h2 className="text-3xl font-display uppercase tracking-tight text-black mb-6">Common Mistakes to Avoid</h2>
+            <p className="mb-4">
+              Many business owners try to do SEO themselves or hire cheap, unverified freelancers, which often leads to poor results. Avoid these common traps:
+            </p>
+            <ul className="list-disc pl-6 space-y-3 mb-6">
+              <li><strong>Keyword Stuffing:</strong> Forcing keywords unnaturally into your text makes it unreadable and can get you penalized by Google.</li>
+              <li><strong>Ignoring Mobile Users:</strong> Most local searches happen on phones. If your site isn't mobile-friendly, Google will drop your ranking.</li>
+              <li><strong>Inconsistent NAP Details:</strong> Your Name, Address, and Phone number must be exactly the same across your website, Google Business Profile, and local directories.</li>
+              <li><strong>Expecting Overnight Results:</strong> SEO is a marathon, not a sprint. It takes consistent effort and time to build authority.</li>
+            </ul>
+            <p>
+              Failing to claim and optimize your Google Business Profile is another massive mistake. A properly structured profile is the cornerstone of <strong>SEO for small business Lucknow</strong>.
+            </p>
+          </section>
+
+          <section>
+            <h2 className="text-3xl font-display uppercase tracking-tight text-black mb-6">How Outtreach Can Help</h2>
+            <p className="mb-4">
+              At Outtreach, we don't just give you a checklist. We are a specialized Growth Marketing Agency building complete digital ecosystems that generate high-quality leads. We understand the local market dynamics.
+            </p>
+            <p>
+              We handle everything from optimizing your website structure, creating high-converting landing pages, managing your local citations, to producing content that ranks. Our approach to <strong>SEO for small business Lucknow</strong> focuses purely on ROI. We make sure that when someone in the city is looking for what you sell, you are the obvious and only choice available to them. 
+            </p>
+          </section>
+
+          <div className="bg-accent-yellow p-12 mt-16 text-center rounded-3xl shadow-xl">
+            <h2 className="text-3xl font-display mb-6 uppercase font-black tracking-tighter text-black">Ready to Dominate Local Search?</h2>
+            <p className="text-lg font-bold text-black/80 mb-8 max-w-2xl mx-auto">
+              Don't let your competitors steal your customers. It's time to build a search presence that works for you 24/7.
+            </p>
+            <p className="text-xl font-black text-black">
+              Book a free consultation with Outtreach at outtreach.com
+            </p>
+            <div className="mt-8 flex justify-center">
+              <button onClick={() => setCurrentPage("booking")} className="bg-black text-white px-8 py-4 rounded-xl font-bold uppercase tracking-widest text-sm hover:scale-105 transition-transform shadow-lg">
+                Claim Your Free Strategy Session
+              </button>
+            </div>
+          </div>
+        </div>
+
+        {/* Comment Section */}
+        <section className="mt-24 pt-24 border-t border-black/10">
+          <h2 className="text-4xl mb-12 flex items-center gap-4 font-display font-black uppercase text-black">
+             Comments <span className="bg-accent-yellow text-black text-sm px-3 py-1 rounded-full font-sans font-bold">{safeComments.length}</span>
+          </h2>
+
+          <form onSubmit={addComment} className="mb-16 space-y-6">
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+              <input 
+                required
+                type="text" 
+                placeholder="Your Name" 
+                value={commentInput.name}
+                onChange={(e) => setCommentInput({...commentInput, name: e.target.value})}
+                className="w-full bg-neutral-50 border border-black/10 p-4 focus:border-accent-yellow outline-none transition-colors font-bold text-black placeholder:text-black/40"
+              />
+            </div>
+            <textarea 
+              required
+              rows={4}
+              placeholder="What are your thoughts on local SEO?" 
+              value={commentInput.text}
+              onChange={(e) => setCommentInput({...commentInput, text: e.target.value})}
+              className="w-full bg-neutral-50 border border-black/10 p-4 focus:border-accent-yellow outline-none transition-colors resize-none text-black placeholder:text-black/40"
+            ></textarea>
+            <button 
+              type="submit"
+              className="bg-black text-white px-10 py-4 font-bold uppercase text-sm hover:translate-y-[-2px] transition-transform cursor-pointer rounded-lg"
+            >
+              Post Comment
+            </button>
+          </form>
+
+          <div className="space-y-8">
+            {safeComments.length === 0 ? (
+              <p className="text-black/50 italic">No comments yet. Be the first to share your thoughts!</p>
+            ) : (
+              safeComments.map((comment, i) => (
+                <motion.div 
+                  key={i}
+                  initial={{ opacity: 0, y: 10 }}
+                  animate={{ opacity: 1, y: 0 }}
+                  className="bg-neutral-50 p-6 md:p-8 rounded-2xl border border-black/5"
+                >
+                  <div className="flex justify-between items-start mb-4">
+                    <h5 className="font-bold text-lg text-black">{comment.name}</h5>
+                    <span className="text-xs text-black/40 font-mono">{comment.date}</span>
+                  </div>
+                  <p className="text-black/70 leading-relaxed">{comment.text}</p>
+                </motion.div>
+              ))
+            )}
+          </div>
+        </section>
       </article>
     </motion.div>
   );
